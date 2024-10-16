@@ -1,0 +1,16 @@
+name: Manage Dependabot PRs
+on: pull_request
+
+permissions:
+  pull-requests: write
+  issues: write
+  repository-projects: write
+
+jobs:
+  dependabot:
+    if: github.actor == 'dependabot[bot]'
+    uses: bolah2009/reusable-gha-workflow/.github/workflows/dependabot.yml@master
+    with:
+      PR_URL: ${{github.event.pull_request.html_url}}
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
